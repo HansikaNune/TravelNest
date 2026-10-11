@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>TravelNest – Smart Travel & Booking Management</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#faf6ee;--card:#fffdf8;--green:#1f3d2f;--sage:#dfe8d8;--sage2:#a9bfa0;--terra:#c4622d;--terra2:#a94f20;--ink:#2b2b2b;--mute:#6b6b63;--gold:#b8923a;--line:#e8e0cf;--sh:0 6px 22px rgba(31,61,47,.09);box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#17201b;--card:#1f2b24;--green:#e6efe0;--sage:#2c3b32;--sage2:#6f8a75;--ink:#ece8dd;--mute:#a4a89d;--line:#34443a;--sh:0 6px 22px rgba(0,0,0,.3)}}
+:root[data-theme="dark"]{--bg:#17201b;--card:#1f2b24;--green:#e6efe0;--sage:#2c3b32;--sage2:#6f8a75;--ink:#ece8dd;--mute:#a4a89d;--line:#34443a;--sh:0 6px 22px rgba(0,0,0,.3)}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 Inter,system-ui,sans-serif;display:flex;min-height:100vh}
+h1,h2,h3,.serif{font-family:"Cormorant Garamond",Georgia,serif;color:var(--green);margin:0;font-weight:600}
+aside{width:236px;background:#1f3d2f;color:#e9efe3;padding:26px 16px;position:sticky;top:0;height:100vh;flex-shrink:0;display:flex;flex-direction:column}
+.logo{font:700 24px "Cormorant Garamond",serif;letter-spacing:.18em;color:#fff;padding:0 10px}.logo i{color:#d9b562;font-style:normal}
+.sub{font-size:11px;color:#a9bfa0;padding:2px 10px 24px;letter-spacing:.04em}
+nav button{display:flex;gap:12px;align-items:center;width:100%;background:none;border:0;color:#cfdac8;padding:11px 12px;border-radius:12px;font:500 14px Inter;cursor:pointer;margin-bottom:3px;text-align:left;transition:.2s}
+nav button:hover{background:rgba(255,255,255,.08);transform:translateX(3px)}
+nav button.on{background:#faf6ee;color:#1f3d2f;box-shadow:inset 4px 0 0 #b8923a}
+.foot{margin-top:auto;font-size:11px;color:#a9bfa0;padding:0 10px}
+main{flex:1;padding:30px 36px;min-width:0;max-width:1200px}
+.hero{border-radius:26px;overflow:hidden;position:relative;height:300px;box-shadow:var(--sh)}
+.hero svg{position:absolute;inset:0;width:100%;height:100%}
+.hero .t{position:absolute;left:36px;bottom:32px;color:#fff;text-shadow:0 2px 14px rgba(0,0,0,.35)}
+.hero h1{color:#fff;font-size:54px;line-height:1.05}.hero p{margin:6px 0 0;opacity:.95}
+.eyebrow{font-size:11px;letter-spacing:.22em;color:var(--gold);font-weight:600;text-transform:uppercase}
+.hero .eyebrow{color:#f0d896}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin:22px 0}
+.stat{background:var(--card);border-radius:18px;padding:18px;box-shadow:var(--sh);border:1px solid var(--line);cursor:pointer;transition:.25s;border-top:3px solid var(--gold)}
+.stat:hover{transform:translateY(-4px)}.stat b{display:block;font:600 36px "Cormorant Garamond",serif;color:var(--green)}.stat span{color:var(--mute);font-size:13px}
+.head{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;flex-wrap:wrap;margin:6px 0 18px}.head h2{font-size:36px}
+.btn{border:0;border-radius:12px;padding:10px 18px;font:600 14px Inter;cursor:pointer;transition:.2s;background:var(--sage);color:var(--green)}
+.btn:hover{transform:translateY(-2px)}.btn.p{background:var(--terra);color:#fff;box-shadow:0 4px 12px rgba(196,98,45,.3)}.btn.p:hover{background:var(--terra2)}
+.btn.s{padding:6px 10px;font-size:13px}.btn.d{background:transparent;color:#a33}
+.tools{display:flex;gap:10px;margin-bottom:14px;flex-wrap:wrap}
+input,select{font:14px Inter;padding:10px 12px;border:1px solid var(--line);border-radius:12px;background:var(--card);color:var(--ink);width:100%}
+.tools input{max-width:320px}.tools select{max-width:190px}input:focus,select:focus,button:focus-visible{outline:2px solid var(--gold);outline-offset:1px}
+.tbl{background:var(--card);border-radius:18px;box-shadow:var(--sh);border:1px solid var(--line);overflow-x:auto}
+table{width:100%;border-collapse:collapse;min-width:560px}th{background:var(--sage);color:var(--green);font-size:12px;letter-spacing:.08em;text-transform:uppercase;text-align:left;padding:13px 16px}
+td{padding:13px 16px;border-top:1px solid var(--line)}tr:hover td{background:rgba(169,191,160,.12)}td.a{white-space:nowrap;text-align:right}
+.pill{padding:3px 10px;border-radius:99px;font-size:12px;font-weight:600;background:var(--sage);color:var(--green)}.pill.w{background:#f6e3d3;color:#9a4a1c}
+.err{color:#a33;font-size:13px;margin-top:10px}.empty{padding:34px;text-align:center;color:var(--mute)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:18px}
+.dc{background:var(--card);border-radius:20px;overflow:hidden;box-shadow:var(--sh);border:1px solid var(--line);transition:.3s}.dc:hover{transform:translateY(-5px)}
+.dc svg{display:block;width:100%;height:150px}.dc .b{padding:14px 16px}.dc h3{font-size:24px}.dc p{margin:2px 0 10px;color:var(--mute);font-size:13px}
+.tag{display:inline-block;padding:3px 10px;border-radius:99px;font:600 11px Inter;letter-spacing:.1em}
+.std{background:var(--sage);color:var(--green)}.cus{background:var(--terra);color:#fff}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}.tabs button{border:1px solid var(--line);background:var(--card);color:var(--ink);padding:8px 14px;border-radius:99px;cursor:pointer;font:500 13px Inter}.tabs button.on{background:var(--green);color:var(--bg);border-color:var(--green)}
+.trip{background:var(--card);border-radius:24px;padding:24px;box-shadow:var(--sh);border:1px solid var(--line)}
+.trip .top{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:6px}
+.route{display:flex;align-items:center;gap:0;margin:16px 0 8px;overflow-x:auto;padding:6px 0}
+.dot{width:34px;height:34px;border-radius:50%;background:var(--green);color:var(--bg);display:grid;place-items:center;font:600 12px Inter;flex-shrink:0;border:3px solid var(--gold)}
+.ln{flex:1;min-width:30px;border-top:2px dashed var(--sage2)}
+.days{display:flex;gap:16px;overflow-x:auto;padding:8px 2px 14px;align-items:flex-start}
+.day{min-width:250px;flex:0 0 250px;background:var(--bg);border:1px solid var(--line);border-radius:18px;padding:14px;border-top:4px solid var(--terra)}
+.day h3{font-size:24px;display:flex;justify-content:space-between;align-items:center}
+.act{background:var(--card);border-radius:14px;padding:11px 12px;margin:10px 0;border-left:3px solid var(--gold);box-shadow:0 2px 8px rgba(0,0,0,.05);transition:.2s}.act:hover{transform:translateY(-2px)}
+.act div{font-size:13px;color:var(--mute)}.act strong{display:block;color:var(--ink);font-size:14px;margin:3px 0}.acts{display:flex;gap:4px;margin-top:6px}
+.addday{min-width:150px;flex:0 0 150px;height:120px;border:2px dashed var(--sage2);border-radius:18px;background:none;color:var(--green);font:600 14px Inter;cursor:pointer}
+.ov{position:fixed;inset:0;background:rgba(20,35,28,.5);display:grid;place-items:center;z-index:9;padding:16px}
+.modal{background:var(--card);border-radius:22px;padding:26px;width:100%;max-width:440px;box-shadow:0 20px 60px rgba(0,0,0,.3);max-height:90vh;overflow:auto}
+.modal h2{font-size:30px;margin-bottom:12px}.modal label{display:block;font-size:12px;font-weight:600;color:var(--mute);margin:10px 0 4px;letter-spacing:.05em}.modal .row{display:flex;gap:8px;justify-content:flex-end;margin-top:20px}
+.bar{display:flex;align-items:center;gap:10px;margin:10px 0;font-size:14px}.bar span{width:130px}.bar i{height:14px;border-radius:8px;background:var(--sage2);display:block;transition:.4s}.bar b{color:var(--green)}
+@media(max-width:820px){body{flex-direction:column}aside{width:100%;height:auto;position:static;padding:14px}nav{display:flex;overflow-x:auto;gap:4px}nav button{width:auto;white-space:nowrap}.foot,.sub{display:none}main{padding:18px}.hero h1{font-size:38px}}
+</style></head><body>
+<aside><div class="logo">TRAVEL<i>NEST</i></div><div class="sub">Smart Travel & Booking Management</div><nav id="nav"></nav><div class="foot">DBMS Mini Project · Demo data</div></aside>
+<main id="main"></main><div id="ov"></div>
+<script>
+const $=s=>document.querySelector(s),esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const PAL=[['#f6c28b','#e8805a','#2f5d50','#1f3d2f'],['#bcd8e8','#7fb0c8','#3f6b73','#24474f'],['#f3d9a4','#d99b4a','#7a5a3a','#4d3825'],['#d5c6e0','#9a86b5','#4b5d6b','#2e3e49'],['#cfe5c9','#8fc09a','#3d7a5a','#235038']];
+function scene(i,h){const p=PAL[i%5],u='g'+i+Math.random().toString(36).slice(2,6);
+return `<svg viewBox="0 0 600 ${h||200}" preserveAspectRatio="xMidYMid slice"><defs><linearGradient id="${u}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${p[0]}"/><stop offset="1" stop-color="${p[1]}"/></linearGradient></defs><rect width="600" height="300" fill="url(#${u})"/><circle cx="${420+i*20%100}" cy="${70+i*7}" r="34" fill="#fff6dc" opacity=".9"/><path d="M0 150 L110 70 L190 130 L290 40 L400 135 L490 85 L600 150 V300 H0Z" fill="${p[2]}" opacity=".75"/><path d="M0 180 L90 120 L200 175 L330 100 L450 170 L600 120 V300 H0Z" fill="${p[3]}"/><path d="M0 235 Q150 215 300 235 T600 232 V300 H0Z" fill="${p[0]}" opacity=".35"/><path d="M60 250 Q200 200 340 235 T560 205" stroke="#fff" stroke-width="2.5" stroke-dasharray="3 7" fill="none"/><circle cx="560" cy="205" r="6" fill="#c4622d" stroke="#fff" stroke-width="2"/></svg>`}
+let D={
+destinations:[{id:1,name:'Kerala Backwaters',country:'India',tagline:'Houseboats & palm lagoons'},{id:2,name:'Santorini',country:'Greece',tagline:'Whitewashed cliffs at sunset'},{id:3,name:'Kyoto',country:'Japan',tagline:'Temples, tea & maple gardens'},{id:4,name:'Swiss Alps',country:'Switzerland',tagline:'Rail journeys through peaks'},{id:5,name:'Bali',country:'Indonesia',tagline:'Rice terraces & beaches'}],
+customers:[{id:1,name:'Ananya Rao',email:'ananya@mail.com',phone:'9876500011',city:'Hyderabad'},{id:2,name:'Rohan Mehta',email:'rohan@mail.com',phone:'9876500022',city:'Mumbai'},{id:3,name:'Sara Khan',email:'sara@mail.com',phone:'9876500033',city:'Delhi'}],
+packages:[{id:1,name:'Backwater Bliss',destination:'Kerala Backwaters',days:4,price:28000,type:'Standard'},{id:2,name:'Aegean Escape',destination:'Santorini',days:6,price:145000,type:'Standard'},{id:3,name:'Zen Journey',destination:'Kyoto',days:5,price:132000,type:'Customized'}],
+bookings:[{id:1,customer:'Ananya Rao',package:'Backwater Bliss',date:'2026-11-12',status:'Confirmed'},{id:2,customer:'Rohan Mehta',package:'Zen Journey',date:'2026-12-03',status:'Pending'},{id:3,customer:'Sara Khan',package:'Aegean Escape',date:'2027-01-18',status:'Confirmed'}],
+payments:[{id:1,booking:1,amount:28000,method:'UPI',status:'Paid'},{id:2,booking:2,amount:40000,method:'Card',status:'Partial'},{id:3,booking:3,amount:0,method:'Bank Transfer',status:'Due'}],
+itineraries:[{id:1,name:'Backwater Bliss – 4 Days',type:'STANDARD',customer:'—',days:[[{p:'Alleppey',t:'10:00',a:'Houseboat check-in & lunch'}],[{p:'Kumarakom',t:'09:00',a:'Bird sanctuary boat ride'}],[{p:'Munnar',t:'11:00',a:'Tea plantation walk'}],[{p:'Kochi',t:'08:30',a:'Fort Kochi heritage tour'}]]},
+{id:2,name:'Zen Journey – Rohan',type:'CUSTOMIZED',customer:'Rohan Mehta',days:[[{p:'Kyoto Station',t:'09:00',a:'Arrival & ryokan check-in'}],[{p:'Fushimi Inari',t:'07:00',a:'Sunrise torii gate hike'},{p:'Gion',t:'18:30',a:'Private tea ceremony'}],[{p:'Arashiyama',t:'10:00',a:'Bamboo grove & monkey park'}],[{p:'Nara',t:'09:30',a:'Deer park & Todai-ji temple'}]]}]};
+const C={
+customers:{t:'Customers',f:[['name','Name'],['email','Email'],['phone','Phone'],['city','City']],flt:'city'},
+packages:{t:'Packages',f:[['name','Package Name'],['destination','Destination','sel','destinations'],['days','Days','number'],['price','Price (₹)','number'],['type','Type','opt',['Standard','Customized']]],flt:'type'},
+bookings:{t:'Bookings',f:[['customer','Customer','sel','customers'],['package','Package','sel','packages'],['date','Travel Date','date'],['status','Status','opt',['Confirmed','Pending','Cancelled']]],flt:'status'},
+payments:{t:'Payments',f:[['booking','Booking ID','number'],['amount','Amount (₹)','number'],['method','Method','opt',['UPI','Card','Bank Transfer','Cash']],['status','Status','opt',['Paid','Partial','Due']]],flt:'status'},
+destinations:{t:'Destinations',f:[['name','Name'],['country','Country'],['tagline','Tagline']],flt:'country'}};
+const NAV=[['dashboard','Dashboard','◈'],['customers','Customers','☺'],['packages','Packages','❖'],['itineraries','Itineraries','⌁'],['bookings','Bookings','✓'],['payments','Payments','₹'],['destinations','Destinations','⌖'],['reports','Reports','▤']];
+let S={v:'dashboard',q:'',f:'',it:0};
+const nid=a=>Math.max(0,...a.map(x=>x.id))+1;
+function navTo(v){S.v=v;S.q='';S.f='';draw()}
+function draw(){
+$('#nav').innerHTML=NAV.map(n=>`<button class="${S.v==n[0]?'on':''}" onclick="navTo('${n[0]}')"><span>${n[2]}</span>${n[1]}</button>`).join('');
+$('#main').innerHTML=S.v=='dashboard'?dash():S.v=='itineraries'?itin():S.v=='reports'?rep():S.v=='destinations'?dest():crud(S.v);}
+function dash(){const k=[['Customers','customers'],['Packages','packages'],['Bookings','bookings'],['Payments','payments'],['Custom Itineraries','itineraries'],['Destinations','destinations']];
+const n=x=>x=='itineraries'?D.itineraries.filter(i=>i.type=='CUSTOMIZED').length:D[x].length;
+return `<div class="hero">${scene(0,300)}<div class="t"><div class="eyebrow">TravelNest · Command Center</div><h1>Plan. Manage. Explore.</h1><p>Welcome back — your next journey starts here.</p></div></div>
+<div class="stats">${k.map(x=>`<div class="stat" onclick="navTo('${x[1]}')"><b>${n(x[1])}</b><span>${x[0]}</span></div>`).join('')}</div>
+<div class="head"><h2>Featured Destinations</h2><button class="btn" onclick="navTo('destinations')">View all →</button></div><div class="grid">${D.destinations.slice(0,3).map(dcard).join('')}</div>`}
+const dcard=d=>`<div class="dc">${scene(d.id)}<div class="b"><h3>${esc(d.name)}</h3><p>📍 ${esc(d.country)} · ${esc(d.tagline)}</p></div></div>`;
+function head(t,add){return `<div class="head"><div><div class="eyebrow">TravelNest</div><h2>${t}</h2></div>${add}</div>`}
+function dest(){const r=filt('destinations');return head('Destinations',`<button class="btn p" onclick="openForm('destinations')">＋ Add New</button>`)+tools('destinations')+`<div class="grid">${r.map(d=>`<div class="dc">${scene(d.id)}<div class="b"><h3>${esc(d.name)}</h3><p>📍 ${esc(d.country)} · ${esc(d.tagline)}</p><button class="btn s" onclick="openForm('destinations',${d.id})">✎ Edit</button> <button class="btn s d" onclick="askDel('destinations',${d.id})">🗑 Delete</button></div></div>`).join('')||'<div class="empty">No destinations found.</div>'}</div>`}
+function filt(k){const c=C[k];return D[k].filter(r=>(!S.q||JSON.stringify(Object.values(r)).toLowerCase().includes(S.q.toLowerCase()))&&(!S.f||r[c.flt]==S.f))}
+function tools(k){const c=C[k],o=[...new Set(D[k].map(r=>r[c.flt]))];return `<div class="tools"><input id="q" placeholder="🔍 Search ${c.t.toLowerCase()}…" value="${esc(S.q)}" oninput="S.q=this.value;redraw()"><select onchange="S.f=this.value;redraw()"><option value="">All ${c.flt}</option>${o.map(x=>`<option ${S.f==x?'selected':''}>${esc(x)}</option>`).join('')}</select></div>`}
+function redraw(){const p=S.q,pos=$('#q')?.selectionStart;draw();const q=$('#q');if(q){q.focus();q.setSelectionRange(pos,pos)}}
+function crud(k){const c=C[k],r=filt(k);
+return head(c.t,`<button class="btn p" onclick="openForm('${k}')">＋ Add New</button>`)+tools(k)+`<div class="tbl"><table><tr><th>ID</th>${c.f.map(f=>`<th>${f[1]}</th>`).join('')}<th></th></tr>${r.map(x=>`<tr><td>#${x.id}</td>${c.f.map(f=>`<td>${f[0]=='status'?`<span class="pill ${/Pending|Due|Partial/.test(x[f[0]])?'w':''}">${esc(x[f[0]])}</span>`:esc(f[0]=='price'||f[0]=='amount'?'₹'+Number(x[f[0]]).toLocaleString('en-IN'):x[f[0]])}</td>`).join('')}<td class="a"><button class="btn s" onclick="openForm('${k}',${x.id})">✎ Edit</button> <button class="btn s d" onclick="askDel('${k}',${x.id})">🗑 Delete</button></td></tr>`).join('')}</table>${r.length?'':'<div class="empty">No records match.</div>'}</div>`}
+function modal(h){$('#ov').innerHTML=`<div class="ov" onclick="if(event.target==this)closeM()"><div class="modal" role="dialog">${h}</div></div>`}
+function showErr(m){let e=document.querySelector('.modal .err');if(!e){e=document.createElement('div');e.className='err';document.querySelector('.modal .row').before(e)}e.textContent=m}
+function closeM(){$('#ov').innerHTML=''}
+function fieldHTML(f,v){const [k,l,t,x]=f;let i;
+if(t=='sel')i=`<select name="${k}">${D[x].map(o=>`<option ${v==o.name?'selected':''}>${esc(o.name)}</option>`).join('')}</select>`;
+else if(t=='opt')i=`<select name="${k}">${x.map(o=>`<option ${v==o?'selected':''}>${o}</option>`).join('')}</select>`;
+else i=`<input name="${k}" type="${t||'text'}" value="${esc(v)}" required>`;
+return `<label>${l.toUpperCase()}</label>${i}`}
+function readForm(){const o={};document.querySelectorAll('.modal [name]').forEach(e=>o[e.name]=e.type=='number'?+e.value:e.value);return o}
+function openForm(k,id){const c=C[k],r=id?D[k].find(x=>x.id==id):{};
+modal(`<h2>${id?'Edit':'Add New'} ${c.t.replace(/s$/,'')}</h2>${c.f.map(f=>fieldHTML(f,r[f[0]])).join('')}<div class="row"><button class="btn" onclick="closeM()">Cancel</button><button class="btn p" onclick="saveRec('${k}',${id||0})">${id?'✎ Update':'＋ Insert'}</button></div>`)}
+function saveRec(k,id){const o=readForm();if(Object.values(o).some(v=>v===''||v!==v)){showErr('Please fill in every field.');return}
+if(id)Object.assign(D[k].find(x=>x.id==id),o);else D[k].push({id:nid(D[k]),...o});closeM();draw()}
+function askDel(k,id){modal(`<h2>Delete record?</h2><p>This will permanently remove #${id} from ${C[k].t}.</p><div class="row"><button class="btn" onclick="closeM()">Cancel</button><button class="btn p" onclick="D['${k}']=D['${k}'].filter(x=>x.id!=${id});closeM();draw()">🗑 Delete</button></div>`)}
+function itin(){const t=D.itineraries[S.it];
+const tabs=`<div class="tabs">${D.itineraries.map((x,i)=>`<button class="${i==S.it?'on':''}" onclick="S.it=${i};draw()">${esc(x.name)}</button>`).join('')}<button onclick="newIt()">＋ New Itinerary</button></div>`;
+if(!t)return head('Itineraries','')+tabs+'<div class="empty">No itineraries yet.</div>';
+const cus=t.type=='CUSTOMIZED';
+return head('Trip Itineraries',`<button class="btn p" onclick="addDay()">＋ Add Day</button>`)+tabs+`<div class="trip"><div class="top"><div><span class="tag ${cus?'cus':'std'}">${t.type} ITINERARY</span><h2 style="margin-top:8px;font-size:34px">${esc(t.name)}</h2><span style="color:var(--mute)">Traveller: ${esc(t.customer)} · ${t.days.length} days</span></div><button class="btn s d" onclick="delIt()">🗑 Delete Itinerary</button></div>
+<div class="route">${t.days.map((d,i)=>`<div class="dot">${i+1}</div>${i<t.days.length-1?'<div class="ln"></div>':''}`).join('')}</div>
+<div class="days">${t.days.map((d,i)=>`<div class="day"><h3>Day ${i+1}<button class="btn s d" title="Delete day" onclick="delDay(${i})">🗑</button></h3>${d.map((a,j)=>`<div class="act"><div>📍 ${esc(a.p)} &nbsp;·&nbsp; 🕐 ${esc(a.t)}</div><strong>🎯 ${esc(a.a)}</strong><div class="acts"><button class="btn s" onclick="actForm(${i},${j})">✎ Edit Activity</button><button class="btn s d" onclick="delAct(${i},${j})">🗑</button></div></div>`).join('')}<button class="btn s" onclick="actForm(${i})">＋ Activity</button></div>`).join('')}<button class="addday" onclick="addDay()">＋ Add Day</button></div></div>`}
+function addDay(){const t=D.itineraries[S.it];if(!t)return;t.days.push([]);draw();actForm(t.days.length-1)}
+function delDay(i){D.itineraries[S.it].days.splice(i,1);draw()}
+function delAct(i,j){D.itineraries[S.it].days[i].splice(j,1);draw()}
+function actForm(i,j){const a=j==null?{}:D.itineraries[S.it].days[i][j];
+modal(`<h2>${j==null?'Add':'Edit'} Activity · Day ${i+1}</h2><label>📍 DESTINATION</label><input name="p" value="${esc(a.p)}"><label>🕐 TIME</label><input name="t" type="time" value="${esc(a.t||'09:00')}"><label>🎯 ACTIVITY</label><input name="a" value="${esc(a.a)}"><div class="row"><button class="btn" onclick="closeM()">Cancel</button><button class="btn p" onclick="saveAct(${i},${j==null?-1:j})">Save</button></div>`)}
+function saveAct(i,j){const o=readForm();if(!o.p||!o.a){showErr('Please fill destination and activity.');return}const d=D.itineraries[S.it].days[i];j<0?d.push(o):d[j]=o;d.sort((x,y)=>x.t>y.t?1:-1);closeM();draw()}
+function newIt(){modal(`<h2>New Itinerary</h2><label>NAME</label><input name="name"><label>TYPE</label><select name="type"><option>CUSTOMIZED</option><option>STANDARD</option></select><label>CUSTOMER</label><input name="customer" value="—"><div class="row"><button class="btn" onclick="closeM()">Cancel</button><button class="btn p" onclick="const o=readForm();if(!o.name)return;D.itineraries.push({id:nid(D.itineraries),...o,days:[[]]});S.it=D.itineraries.length-1;closeM();draw()">＋ Create</button></div>`)}
+function delIt(){D.itineraries.splice(S.it,1);S.it=0;draw()}
+function rep(){const m=[['Confirmed bookings',D.bookings.filter(b=>b.status=='Confirmed').length],['Pending bookings',D.bookings.filter(b=>b.status=='Pending').length],['Standard packages',D.packages.filter(p=>p.type=='Standard').length],['Custom packages',D.packages.filter(p=>p.type=='Customized').length]];
+const rev=D.payments.reduce((s,p)=>s+p.amount,0),mx=Math.max(1,...m.map(x=>x[1]));
+return head('Reports','')+`<div class="stats"><div class="stat"><b>₹${rev.toLocaleString('en-IN')}</b><span>Total payments received</span></div><div class="stat"><b>${D.bookings.length}</b><span>Total bookings</span></div></div><div class="trip"><h3>At a glance</h3>${m.map(x=>`<div class="bar"><span>${x[0]}</span><i style="width:${x[1]/mx*50+4}%"></i><b>${x[1]}</b></div>`).join('')}</div>`}
+draw();
+</script></body></html>
